@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
 import { CartContext } from './Cart';
+
+
 const Total = () => {
     const {Clear,totalAmount} = useContext(CartContext);
     const paid = () =>{
         {totalAmount!==0?
-            (alert(`After applying special offers amount to be paid ${totalAmount} `)):
-            (alert("Your Cart is Empty"))}
+            (alert(`After applying special offers amount to be paid ${totalAmount}`)):
+            (alert("Your Cart is Empty"))
+        }
     }
     return (
         <div className="flex flex-col items-center mt-20">

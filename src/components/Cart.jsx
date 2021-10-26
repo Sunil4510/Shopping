@@ -10,7 +10,6 @@ const initialState = {
     totalAmount: 0,
     totalItems:0,
 };
-console.log(initialState.items);
 
 const Cart = () => {
 
