@@ -23,7 +23,7 @@ const ContextCart = () => {
                            <button className="border-2  w-40 h-12 text-xl font-bold rounded-lg bg-blue-400 text-center text-white hover:bg-blue-300" onClick={()=>window.location.reload()}>Reload</button>
                            </div>
                         ):(
-                          console.log(items) 
+                          console.log() 
                         )}
                     </Scrollbars>
                 </div>

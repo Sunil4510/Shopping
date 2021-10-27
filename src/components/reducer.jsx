@@ -1,5 +1,5 @@
-var a1=false;
-var a2=false;
+
+let q=0;
 export const reducer = (state,action) => {
     if(action.type === 'increment') {
        let updated = state.items.map((item) =>{
@@ -41,26 +41,38 @@ export const reducer = (state,action) => {
         let { totalItems,totalAmount} = state.items.reduce((accume,item)=>{
             let{price,quantity,id} = item;
             let updatedTotalAmount = price * quantity;
-
-            if(id===4 && quantity>=2){
-                updatedTotalAmount -=1*price; 
+            
+            //Cheese
+            if(id===4 && quantity%2===0){
+                let dis = quantity/2;
+                updatedTotalAmount -=dis*price; 
             }
             
+            //butter 
+            if(id===3 && quantity%3===0){
+                let dis = quantity/3;
+                updatedTotalAmount -=dis*price;
+            }
+            //soup and bread
+           
             if(id===5 && quantity>=1){
-                a1 = true;
+                q = quantity;
+                console.log(q);
+            }else{
+                if(id===5){
+                    q=0;
+                }
             }
-            let half_bread=0;
-            if(id===1 && quantity>=1){
-                a2=true;
-                half_bread = price/2;
-                console.log(half_bread);
+            if(id===1 && quantity>=1 && q>=1){
+                let pp = price;
+                let half = pp/2;
+                updatedTotalAmount -=half; 
+            }else{
+                if(id===1 && quantity>=1){
+                    updatedTotalAmount =quantity*price;
+                }
             }
-           if(id==3 && quantity>=3){
-               updatedTotalAmount -=1*price;
-           }
-            if(a1 && a2){
-                updatedTotalAmount -=half_bread;
-            }
+
             accume.totalAmount += updatedTotalAmount;
             accume.totalItems += quantity;
             return accume;
