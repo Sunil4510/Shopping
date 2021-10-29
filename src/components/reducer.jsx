@@ -1,4 +1,4 @@
-let q=0;
+let discount=0;
 export const reducer = (state,action) => {
     if(action.type === 'increment') {
        let updated = state.items.map((item) =>{
@@ -68,14 +68,14 @@ export const reducer = (state,action) => {
             //soup and bread
            
             if(id===5 && quantity>=1){
-                q = quantity;
-                console.log(q);
+                discount = quantity;
+                console.log(discount);
             }else{
                 if(id===5){
-                    q=0;
+                    discount=0;
                 }
             }
-            if(id===1 && quantity>=1 && q>=1){
+            if(id===1 && quantity>=1 && discount>=1){
                 let half = price/2;
                 updatedTotalAmount -=half; 
             }else{
