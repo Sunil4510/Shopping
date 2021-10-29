@@ -1,9 +1,14 @@
-
 let q=0;
 export const reducer = (state,action) => {
     if(action.type === 'increment') {
        let updated = state.items.map((item) =>{
            if(item.id === action.payload){
+               if(item.id===4){
+                   return {...item, quantity:item.quantity+2};
+               }
+               if(item.id===3){
+                   return {...item, quantity:item.quantity+3};
+               }
                return {...item,quantity: item.quantity+1};
            }
            return item;
@@ -14,12 +19,19 @@ export const reducer = (state,action) => {
     if(action.type === 'decrement'){
         let updates = state.items.map((item)=>{
             if(item.id === action.payload) {
+                if(item.id===4){
+                    return{...item,quantity:item.quantity-2};
+                }
+                if(item.id===3){
+                    return{...item,quantity:item.quantity-3};
+                }
                 return{...item,quantity: item.quantity-1};
             }
             return item;
         })
         return{...state,items: updates};
     }
+    
     if(action.type === 'delete') {
         return({
             ...state,
