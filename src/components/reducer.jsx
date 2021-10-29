@@ -76,8 +76,7 @@ export const reducer = (state,action) => {
                 }
             }
             if(id===1 && quantity>=1 && q>=1){
-                let pp = price;
-                let half = pp/2;
+                let half = price/2;
                 updatedTotalAmount -=half; 
             }else{
                 if(id===1 && quantity>=1){
