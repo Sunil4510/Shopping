@@ -1,4 +1,5 @@
-let discount=0;
+
+
 export const reducer = (state,action) => {
     if(action.type === 'increment') {
        let updated = state.items.map((item) =>{
@@ -50,11 +51,13 @@ export const reducer = (state,action) => {
 
     if(action.type === 'get_total'){
         
-        let { totalItems,totalAmount} = state.items.reduce((accume,item)=>{
+        let { totalItems,totalAmount,discountSoup,discountBread} = state.items.reduce((accume,item)=>{
             let{price,quantity,id} = item;
             let updatedTotalAmount = price * quantity;
-            
+            let discSoup = 0;
+            let discBread = 0;
             //Cheese
+
             if(id===4 && quantity%2===0){
                 let dis = quantity/2;
                 updatedTotalAmount -=dis*price; 
@@ -65,33 +68,32 @@ export const reducer = (state,action) => {
                 let dis = quantity/3;
                 updatedTotalAmount -=dis*price;
             }
-            //soup and bread
-           
-            if(id===5 && quantity>=1){
-                discount = quantity;
-                console.log(discount);
-            }else{
-                if(id===5){
-                    discount=0;
-                }
-            }
-            if(id===1 && quantity>=1 && discount>=1){
-                let half = price/2;
-                updatedTotalAmount -=half; 
-            }else{
-                if(id===1 && quantity>=1){
-                    updatedTotalAmount =quantity*price;
-                }
-            }
 
-            accume.totalAmount += updatedTotalAmount;
+            //soup and bread
+           if(id===5 && quantity>=1){
+               discSoup = 1;
+           }
+           if(id===1 && quantity>=1){
+                discBread = 1;
+           }
+
+            
             accume.totalItems += quantity;
+            accume.discountSoup  += discSoup;
+            accume.discountBread += discBread;
+            accume.totalAmount += updatedTotalAmount;
             return accume;
-        },{totalAmount: 0,totalItems:0});
+        },{totalAmount: 0,totalItems:0,discountSoup:0,discountBread:0});
+
+        if(discountSoup===1 && discountBread===1){
+            totalAmount = totalAmount - (90/2);
+        }
         return{
             ...state,
             totalAmount,
             totalItems,
+            discountSoup,
+            discountBread,
         };
     }
     return state;
