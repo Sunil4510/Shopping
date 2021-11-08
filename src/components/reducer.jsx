@@ -4,12 +4,12 @@ export const reducer = (state,action) => {
     if(action.type === 'increment') {
        let updated = state.items.map((item) =>{
            if(item.id === action.payload){
-               if(item.id===4){
-                   return {...item, quantity:item.quantity+2};
-               }
-               if(item.id===3){
-                   return {...item, quantity:item.quantity+3};
-               }
+            //    if(item.id===4){
+            //        return {...item, quantity:item.quantity+2};
+            //    }
+            //    if(item.id===3){
+            //        return {...item, quantity:item.quantity+3};
+            //    }
                return {...item,quantity: item.quantity+1};
            }
            return item;
@@ -20,12 +20,12 @@ export const reducer = (state,action) => {
     if(action.type === 'decrement'){
         let updates = state.items.map((item)=>{
             if(item.id === action.payload) {
-                if(item.id===4){
-                    return{...item,quantity:item.quantity-2};
-                }
-                if(item.id===3){
-                    return{...item,quantity:item.quantity-3};
-                }
+                // if(item.id===4){
+                //     return{...item,quantity:item.quantity-2};
+                // }
+                // if(item.id===3){
+                //     return{...item,quantity:item.quantity-3};
+                // }
                 return{...item,quantity: item.quantity-1};
             }
             return item;
@@ -61,12 +61,23 @@ export const reducer = (state,action) => {
             if(id===4 && quantity%2===0){
                 let dis = quantity/2;
                 updatedTotalAmount -=dis*price; 
+            }else{
+                if(id===4 && quantity>2){
+                    let dis = Math.floor(quantity/2);
+                    console.log(dis)
+                updatedTotalAmount -=dis*70; 
+                }
             }
             
             //butter 
             if(id===3 && quantity%3===0){
                 let dis = quantity/3;
                 updatedTotalAmount -=dis*price;
+            }else{
+                if(id===3 && quantity>3){
+                    let dis = Math.floor(quantity/3);
+                    updatedTotalAmount -=dis*100;
+                }
             }
 
             //soup and bread
